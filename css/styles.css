@@ -187,7 +187,7 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
 .section-heading h2 { margin-bottom: 0; }
 .section-heading > p { max-width: 320px; color: var(--ivory-muted); }
 
-.service-tabs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+.service-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .service-card {
   position: relative;
   min-height: 176px; text-align: left; padding: 20px; border: 1px solid var(--line); border-radius: 14px;
@@ -326,7 +326,7 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
 @media (max-width: 1100px) {
   .about { grid-template-columns: 1fr 1fr; }
   .value-list { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 0 28px; }
-  .service-tabs { grid-template-columns: repeat(3, 1fr); }
+  .service-tabs { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 860px) {
