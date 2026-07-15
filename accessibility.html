@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accessibility — Saint Cuts</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header class="site-header scrolled">
+  <a class="brand" href="index.html" aria-label="Saint Cuts home">
+    <span class="brand-mark" aria-hidden="true">&#10022;</span>
+    <span class="brand-text"><span class="brand-name">Saint</span><span class="brand-sub">Cuts</span></span>
+  </a>
+  <nav class="site-nav" style="justify-self:center;"><a href="index.html">Back to site</a></nav>
+  <span></span>
+</header>
+
+<main class="legal-main">
+  <h1>Accessibility Statement</h1>
+  <section>
+    <h2>Our commitment</h2>
+    <p>Saint Cuts aims to keep this site usable for everyone, including visitors using screen readers, keyboard navigation, or reduced-motion settings. Background video is muted, decorative, and pauses automatically for visitors who prefer reduced motion.</p>
+  </section>
+  <section>
+    <h2>Feedback</h2>
+    <p>If you encounter an accessibility barrier on this site, please contact us at <a href="mailto:[shop email]">[shop email]</a> or <a href="tel:[509 phone number]">[509 phone number]</a> so we can address it.</p>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <a class="brand footer-brand" href="index.html" aria-label="Saint Cuts home">
+    <span class="brand-mark" aria-hidden="true">&#10022;</span>
+    <span class="brand-text"><span class="brand-name">Saint</span><span class="brand-sub">Cuts</span></span>
+  </a>
+  <p>&copy; <span id="year"></span> Saint Cuts. All rights reserved.</p>
+  <nav aria-label="Legal">
+    <a href="privacy.html">Privacy</a>
+    <a href="accessibility.html">Accessibility</a>
+  </nav>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
