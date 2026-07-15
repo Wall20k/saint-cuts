@@ -26,14 +26,11 @@ The 3D treatment is built from the real video footage, not abstract graphics:
 
 ## Before launch — fill in real business info
 
-Search `index.html`, `privacy.html`, and `accessibility.html` for bracketed placeholders and replace them:
+Address, phone, and Instagram are filled in. Still to do:
 
-- `[Shop address]` — street address (appears in Visit section and map card, x2)
-- `[509 phone number]` — shop phone number
-- `@saint.cuts` / `[Confirm handle]` — Instagram handle
-- `[shop email]` — contact email (legal pages)
-- Hours are currently set to "By appointment" — update the Visit section in `index.html` if you want listed hours instead.
-- Map link: the "Get directions" card in the Visit section links to plain `https://maps.google.com` right now. Update the `href` on the `.map-card` link in `index.html` to a real Google Maps query once you have the address (e.g. `https://maps.google.com/?q=<your address>`).
+- `[shop email]` — contact email, used in `privacy.html` and `accessibility.html` (search for it)
+- Street number: the address currently just says "South Grand Avenue" — add the building/suite number if there is one, in the Visit section and map label in `index.html`, and in the map link's `href` query.
+- Hours are set to "By appointment" — update the Visit section in `index.html` if you want listed hours instead.
 - Booking button: in `index.html`, find `data-placeholder-link` on the "Book Appointment" button in the Booking section and replace `href="#"` with your real scheduling link (Square, Booksy, Calendly, etc.), then remove the `data-placeholder-link` attribute so it navigates normally instead of showing the "connect your booking platform" toast.
 
 ## Video/image asset roles
