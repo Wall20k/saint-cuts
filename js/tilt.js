@@ -5,8 +5,8 @@
   var isFinePointer = window.matchMedia('(pointer: fine)').matches;
   if (reduceMotion || !isFinePointer) return;
 
-  /* ---- Card tilt (service cards, gallery cards) ---- */
-  var tiltEls = document.querySelectorAll('.service-card, .gallery-card, .about-media, .map-card');
+  /* ---- Card tilt (service cards, about portrait, map card, video chip) ---- */
+  var tiltEls = document.querySelectorAll('.service-card, .about-media, .map-card');
   tiltEls.forEach(function (el) {
     el.classList.add('tilt');
     var raf = null;
@@ -33,27 +33,32 @@
     });
   });
 
-  /* ---- Hero video tilt ---- */
-  var hero = document.getElementById('hero');
-  var heroFrame = document.querySelector('.hero-media');
-  if (hero && heroFrame) {
-    var heroRaf = null;
-    hero.addEventListener('mousemove', function (e) {
-      if (heroRaf) return;
-      heroRaf = requestAnimationFrame(function () {
-        var rect = hero.getBoundingClientRect();
+  /* ---- Full-bleed video tilt (hero + booking CTA panes) ---- */
+  function bindMediaTilt(sectionId, mediaId, strengthX, strengthY) {
+    var section = document.getElementById(sectionId);
+    var media = document.getElementById(mediaId);
+    if (!section || !media) return;
+    var raf = null;
+
+    section.addEventListener('mousemove', function (e) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        var rect = section.getBoundingClientRect();
         var px = (e.clientX - rect.left) / rect.width;
         var py = (e.clientY - rect.top) / rect.height;
-        var rx = (0.5 - py) * 3.5;
-        var ry = (px - 0.5) * 4.5;
-        heroFrame.style.setProperty('--hero-rx', rx.toFixed(2) + 'deg');
-        heroFrame.style.setProperty('--hero-ry', ry.toFixed(2) + 'deg');
-        heroRaf = null;
+        var rx = (0.5 - py) * strengthX;
+        var ry = (px - 0.5) * strengthY;
+        media.style.setProperty('--tilt-rx', rx.toFixed(2) + 'deg');
+        media.style.setProperty('--tilt-ry', ry.toFixed(2) + 'deg');
+        raf = null;
       });
     });
-    hero.addEventListener('mouseleave', function () {
-      heroFrame.style.setProperty('--hero-rx', '0deg');
-      heroFrame.style.setProperty('--hero-ry', '0deg');
+    section.addEventListener('mouseleave', function () {
+      media.style.setProperty('--tilt-rx', '0deg');
+      media.style.setProperty('--tilt-ry', '0deg');
     });
   }
+
+  bindMediaTilt('hero', 'hero-media', 3.5, 4.5);
+  bindMediaTilt('booking', 'booking-media', 2.5, 3.5);
 })();

@@ -37,7 +37,6 @@
   <nav class="site-nav" id="site-nav" aria-label="Primary">
     <a href="#about">About</a>
     <a href="#services">Services</a>
-    <a href="#work">Gallery</a>
     <a href="#visit">Visit</a>
   </nav>
 
@@ -48,13 +47,12 @@
 
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero" aria-labelledby="hero-title">
-    <div class="hero-media" aria-hidden="true">
+    <div class="hero-media tilt-media" id="hero-media" aria-hidden="true">
       <video class="hero-video" autoplay muted loop playsinline preload="auto"
              poster="assets/images/tools-macro.png">
         <source src="assets/video/hero-loop.mp4" type="video/mp4">
       </video>
       <div class="hero-scrim"></div>
-      <div class="scene3d" id="scene3d"></div>
       <div class="hero-grain"></div>
     </div>
 
@@ -148,31 +146,6 @@
     </div>
   </section>
 
-  <!-- ============ GALLERY ============ -->
-  <section class="section work" id="work" aria-labelledby="work-title">
-    <div class="work-heading reveal">
-      <p class="eyebrow">Our craftsmanship</p>
-      <h2 id="work-title">Looks that speak for themselves.</h2>
-      <p>A closer look at the shop, the tools, and the standard behind every chair.</p>
-    </div>
-    <div class="gallery reveal">
-      <div class="gallery-card tall">
-        <img src="assets/images/shop-interior.png" alt="Vintage leather barber chair in the Saint Cuts shop" loading="lazy">
-        <span>The chair</span>
-      </div>
-      <div class="gallery-card">
-        <img src="assets/images/tools-macro.png" alt="Barber scissors, razor and comb on a marble counter" loading="lazy">
-        <span>The tools</span>
-      </div>
-      <div class="gallery-card gallery-card-video">
-        <video autoplay muted loop playsinline preload="metadata" aria-label="Detail shot in motion">
-          <source src="assets/video/gallery-loop.mp4" type="video/mp4">
-        </video>
-        <span>In motion</span>
-      </div>
-    </div>
-  </section>
-
   <!-- ============ VISIT ============ -->
   <section class="section visit" id="visit" aria-labelledby="visit-title">
     <div class="visit-copy reveal">
@@ -218,8 +191,8 @@
 
   <!-- ============ BOOKING CTA ============ -->
   <section class="section booking" id="booking" aria-labelledby="booking-title">
-    <div class="booking-media">
-      <video autoplay muted loop playsinline preload="none" poster="assets/images/shop-interior.png" aria-hidden="true">
+    <div class="booking-media tilt-media" id="booking-media" aria-hidden="true">
+      <video autoplay muted loop playsinline preload="none" poster="assets/images/shop-interior.png">
         <source src="assets/video/cta-loop.mp4" type="video/mp4">
       </video>
       <div class="booking-scrim"></div>
@@ -254,6 +227,5 @@
 
 <script src="js/main.js" defer></script>
 <script src="js/tilt.js" defer></script>
-<script type="module" src="js/scene3d.js"></script>
 </body>
 </html>

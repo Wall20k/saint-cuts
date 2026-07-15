@@ -10,19 +10,19 @@ privacy.html           Privacy policy stub
 accessibility.html     Accessibility statement stub
 css/styles.css         All styles
 js/main.js              Nav, service tabs, scroll reveal, video/reduced-motion handling
-js/tilt.js              CSS 3D tilt-on-hover for cards + hero (desktop/fine-pointer only)
-js/scene3d.js           Three.js ambient wireframe scene layered over the hero video
-js/vendor/three.module.min.js   Vendored Three.js r169 (MIT license) — no runtime CDN dependency
+js/tilt.js              CSS 3D tilt for the hero/booking videos + hover-tilt for cards (desktop/fine-pointer only)
 assets/images/          shop-interior.png, tools-macro.png
-assets/video/           hero-loop.mp4, gallery-loop.mp4, cta-loop.mp4
+assets/video/           hero-loop.mp4, cta-loop.mp4 (in use), gallery-loop.mp4 (unused — see note below)
 netlify.toml             Netlify build/cache config + security headers + noindex
 ```
 
 ## 3D / animation layer
 
-- **Hero**: a small Three.js scene (wireframe rings + a faceted "gem" + a sparse particle field) renders over the hero video with `mix-blend-mode: screen`, plus a subtle CSS 3D tilt on the whole hero pane that follows the pointer. Runs on all devices; skipped automatically if `prefers-reduced-motion` is set or the browser reports `saveData`. Fails silently (no crash, no visual artifact) if WebGL is unavailable.
-- **Cards** (services, gallery, about portrait, map): CSS 3D tilt-on-hover with a light "shine" following the cursor. Desktop/fine-pointer only — touch devices keep the existing tap/active states instead, since hover-tilt doesn't make sense without a persistent pointer.
-- Three.js is vendored locally under `js/vendor/` (not loaded from a CDN at runtime) so the page has no third-party script dependency at request time — better privacy, and no supply-chain risk from a compromised CDN post-deploy. It's MIT-licensed; see `js/vendor/three.module.min.js`'s header comment for the license notice.
+The 3D treatment is built from the real video footage, not abstract graphics:
+
+- **Hero and Booking CTA**: the full-bleed video panes tilt subtly in 3D (`perspective` + `rotateX/rotateY`) following the pointer, like a floating glass panel. Desktop/fine-pointer only.
+- **Cards** (services, about portrait, map): CSS 3D tilt-on-hover with a light "shine" following the cursor. Desktop/fine-pointer only — touch devices keep the existing tap/active states instead, since hover-tilt doesn't make sense without a persistent pointer.
+- All tilt effects respect `prefers-reduced-motion` (skipped entirely) and add no dependency — no external library, no runtime CDN request.
 
 ## Before launch — fill in real business info
 
@@ -39,11 +39,11 @@ Search `index.html`, `privacy.html`, and `accessibility.html` for bracketed plac
 
 - `hero-loop.mp4` — hero background video (above the fold)
 - `cta-loop.mp4` — booking section background video
-- `gallery-loop.mp4` — gallery grid accent tile
-- `shop-interior.png` — About section + gallery
-- `tools-macro.png` — Services panel + gallery
+- `gallery-loop.mp4` — **not currently used on the page** (the "Our Craftsmanship" gallery section was removed). The file is still in `assets/video/` in case you want to use it elsewhere — nothing loads it right now.
+- `shop-interior.png` — About section photo
+- `tools-macro.png` — Services panel photo
 
-These were assigned by best guess (I couldn't preview the raw video frames in this environment). If a clip doesn't match its section, just swap the file under the same filename, or update the `<source>` path in `index.html`.
+Video/section pairings were assigned by best guess (I couldn't preview the raw video frames in this environment). If a clip doesn't match its section, just swap the file under the same filename, or update the `<source>` path in `index.html`.
 
 ## Run locally
 
