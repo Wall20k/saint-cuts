@@ -97,19 +97,4 @@
       v.pause();
     });
   }
-
-  // Placeholder booking link -> toast instead of dead navigation
-  var toast = doc.getElementById('draft-notice');
-  var toastTimer = null;
-  doc.querySelectorAll('[data-placeholder-link]').forEach(function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (!toast) return;
-      toast.classList.add('show');
-      window.clearTimeout(toastTimer);
-      toastTimer = window.setTimeout(function () {
-        toast.classList.remove('show');
-      }, 4000);
-    });
-  });
 })();

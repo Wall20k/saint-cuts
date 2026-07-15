@@ -26,12 +26,10 @@ The 3D treatment is built from the real video footage, not abstract graphics:
 
 ## Before launch — fill in real business info
 
-Address, phone, and Instagram are filled in. Still to do:
+Address, phone, Instagram, and the booking link are all filled in. Still to do:
 
 - `[shop email]` — contact email, used in `privacy.html` and `accessibility.html` (search for it)
-- Street number: the address currently just says "South Grand Avenue" — add the building/suite number if there is one, in the Visit section and map label in `index.html`, and in the map link's `href` query.
 - Hours are set to "By appointment" — update the Visit section in `index.html` if you want listed hours instead.
-- Booking button: in `index.html`, find `data-placeholder-link` on the "Book Appointment" button in the Booking section and replace `href="#"` with your real scheduling link (Square, Booksy, Calendly, etc.), then remove the `data-placeholder-link` attribute so it navigates normally instead of showing the "connect your booking platform" toast.
 
 ## Video/image asset roles
 
