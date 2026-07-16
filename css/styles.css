@@ -61,8 +61,8 @@ p { margin: 0; }
   height: 68px; background: rgba(4, 12, 16, .82); border-color: var(--line);
   backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
 }
-.brand { display: flex; align-items: center; gap: 9px; line-height: 1; }
-.brand-mark { color: var(--champagne); font-size: 15px; }
+.brand { display: flex; align-items: center; gap: 10px; line-height: 1; }
+.brand-mark { height: 42px; width: auto; display: block; }
 .brand-text { display: flex; flex-direction: column; }
 .brand-name { font-family: var(--serif); font-size: 22px; letter-spacing: .08em; }
 .brand-sub { font-size: 8px; letter-spacing: .5em; color: var(--champagne-light); margin-top: 3px; }

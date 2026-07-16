@@ -1,4 +1,4 @@
-# Saint Cuts — Website
+# Saint The Barber — Website
 
 Static site, no build step. Plain HTML/CSS/JS.
 
@@ -11,10 +11,16 @@ accessibility.html     Accessibility statement stub
 css/styles.css         All styles
 js/main.js              Nav, service tabs, scroll reveal, video/reduced-motion handling
 js/tilt.js              CSS 3D tilt for the hero/booking videos + hover-tilt for cards (desktop/fine-pointer only)
-assets/images/          shop-interior.png, tools-macro.png
+assets/images/          shop-interior.png, tools-macro.png, logo-mark.png (nav/footer icon),
+                        logo-full.png (spare, with wordmark, unused on the page),
+                        favicon-32.png / favicon-512.png
 assets/video/           hero-loop.mp4, cta-loop.mp4 (in use), gallery-loop.mp4 (unused — see note below)
 netlify.toml             Netlify build/cache config + security headers + noindex
 ```
+
+## Logo
+
+`logo-mark.png` is a cropped, transparent-background version of the supplied crest logo (crest only, wordmark removed) used next to the "Saint / The Barber" text in the header and footer. `logo-full.png` is the same treatment but keeps the "SAINT THE BARBER" text baked into the image — not used anywhere currently, kept in case you want it for something like a larger standalone placement. Both had their black background converted to transparency locally (brightness-based alpha), so they drop onto the dark theme with no visible box around them. Favicons were generated from the crest mark.
 
 ## 3D / animation layer
 
@@ -60,7 +66,7 @@ Then open the printed local URL.
 ```
 git init
 git add .
-git commit -m "Saint Cuts site"
+git commit -m "Saint The Barber site"
 git branch -M main
 git remote add origin <your-repo-url>
 git push -u origin main
