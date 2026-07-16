@@ -42,10 +42,10 @@ The service menu in the Services section (`index.html`) mirrors the real Booksy 
 
 ## Recent Work carousel
 
-The "Work" section (`index.html`, between Services and Visit) is a 6-slide carousel of real customer photos/videos, in `assets/gallery/`:
+The "Work" section (`index.html`, between Services and Visit) is a 5-slide carousel of real customer photos/video, in `assets/gallery/`:
 
 - `work-photo-1.jpg` through `work-photo-4.jpg` — real haircut photos, converted from the original PNG/JPEG captures to optimized JPEGs (originals were 4–12MB lossless PNGs; re-encoded at quality 85, ~250–370KB each with no visible quality loss)
-- `work-video-1.mp4`, `work-video-2.mp4` — real haircut clips. **The original files were HEVC (H.265)-encoded .mov files straight from iPhone, which Chrome/Firefox/Edge cannot play** (only Safari supports HEVC natively) — transcoded to H.264 MP4 with ffmpeg for universal browser support. `work-video-1-poster.jpg` / `work-video-2-poster.jpg` are extracted first-frame thumbnails so the video slides don't show blank before playback starts.
+- `work-video-1.mp4` — a real haircut clip. **The original file was an HEVC (H.265)-encoded .mov file straight from iPhone, which Chrome/Firefox/Edge cannot play** (only Safari supports HEVC natively) — transcoded to H.264 MP4 with ffmpeg for universal browser support. `work-video-1-poster.jpg` is an extracted first-frame thumbnail so the slide doesn't show blank before playback starts. A second video was originally included but removed since it showed the same person as the first.
 - Behavior: photo slides auto-advance every 4.5s; video slides play through their actual length and advance on the browser's native `ended` event (not a hardcoded timer), muted/inline. Supports swipe (touch), arrow buttons, dot navigation, and keyboard arrow keys. Pauses on hover/focus and when scrolled out of view. Fully skips auto-advance under `prefers-reduced-motion` (manual navigation still works).
 - To add/remove/reorder slides: edit the `.carousel-slide` elements inside `#carousel-track` in `index.html` and add/remove a matching `.carousel-dot` button — the JS in `js/carousel.js` reads slide count from the DOM, no hardcoded indices to update.
 - If you add more HEVC-source phone videos later, transcode them the same way before using them on the site: `ffmpeg -i input.mov -c:v libx264 -profile:v high -pix_fmt yuv420p -crf 20 -preset slow -c:a aac -b:a 128k -movflags +faststart output.mp4`
