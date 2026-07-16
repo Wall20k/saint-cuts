@@ -12,13 +12,15 @@
   var viewport = root.querySelector('.carousel-viewport');
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var IMAGE_DURATION = 3000;
+  var IMAGE_DURATION = 2000;
   var VIDEO_FALLBACK = 16000;
+  var HOLD_THRESHOLD = 300;
 
   var index = 0;
   var timer = null;
   var inView = true;
-  var hovering = false;
+  var held = false;
+  var currentAdvance = null;
 
   function activeVideo() {
     var slide = slides[index];
@@ -48,25 +50,61 @@
     });
   }
 
-  function scheduleNext() {
+  function playVideo(video) {
+    var p = video.play();
+    if (p && p.catch) p.catch(function () {});
+  }
+
+  function armFallback() {
     clearTimer();
-    if (reduceMotion || !inView || hovering) return;
+    timer = window.setTimeout(function () {
+      if (currentAdvance) currentAdvance();
+    }, VIDEO_FALLBACK);
+  }
+
+  function armImageTimer() {
+    clearTimer();
+    timer = window.setTimeout(function () { goTo(index + 1); }, IMAGE_DURATION);
+  }
+
+  /* Called whenever a slide becomes newly active (fresh start, from goTo). */
+  function activateSlide() {
+    if (reduceMotion || !inView) { currentAdvance = null; return; }
 
     var video = activeVideo();
     if (video) {
       video.currentTime = 0;
       var advanced = false;
-      var advance = function () {
+      currentAdvance = function () {
         if (advanced) return;
         advanced = true;
         goTo(index + 1);
       };
-      video.addEventListener('ended', advance, { once: true });
-      var playPromise = video.play();
-      if (playPromise && playPromise.catch) playPromise.catch(function () {});
-      timer = window.setTimeout(advance, VIDEO_FALLBACK);
+      video.addEventListener('ended', currentAdvance, { once: true });
+      playVideo(video);
+      armFallback();
     } else {
-      timer = window.setTimeout(function () { goTo(index + 1); }, IMAGE_DURATION);
+      currentAdvance = null;
+      armImageTimer();
+    }
+  }
+
+  /* Pause without losing playback position (hold gesture only). */
+  function pauseForHold() {
+    clearTimer();
+    var video = activeVideo();
+    if (video) video.pause();
+  }
+
+  /* Resume exactly where it left off after a hold ends. */
+  function resumeFromHold() {
+    if (reduceMotion || !inView) return;
+    var video = activeVideo();
+    if (video) {
+      playVideo(video);
+      armFallback();
+    } else {
+      armImageTimer();
     }
   }
 
@@ -75,7 +113,7 @@
     pauseAllVideos();
     index = (i + slides.length) % slides.length;
     render();
-    scheduleNext();
+    activateSlide();
   }
 
   prevBtn.addEventListener('click', function () { goTo(index - 1); });
@@ -89,27 +127,35 @@
     else if (e.key === 'ArrowRight') { goTo(index + 1); }
   });
 
-  root.addEventListener('mouseenter', function () {
-    hovering = true;
-    clearTimer();
-    var v = activeVideo();
-    if (v) v.pause();
-  });
-  root.addEventListener('mouseleave', function () {
-    hovering = false;
-    var v = activeVideo();
-    if (v) {
-      var p = v.play();
-      if (p && p.catch) p.catch(function () {});
+  /* ---- Press-and-HOLD to pause (plain clicks/taps never pause) ---- */
+  var holdTimer = null;
+
+  function onPointerDown() {
+    window.clearTimeout(holdTimer);
+    holdTimer = window.setTimeout(function () {
+      held = true;
+      pauseForHold();
+    }, HOLD_THRESHOLD);
+  }
+
+  function onPointerRelease() {
+    window.clearTimeout(holdTimer);
+    if (held) {
+      held = false;
+      resumeFromHold();
     }
-    scheduleNext();
-  });
+  }
+
+  root.addEventListener('pointerdown', onPointerDown);
+  root.addEventListener('pointerup', onPointerRelease);
+  root.addEventListener('pointercancel', onPointerRelease);
+  root.addEventListener('pointerleave', onPointerRelease);
 
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
       inView = entries[0].isIntersecting;
       if (inView) {
-        scheduleNext();
+        if (!held) activateSlide();
       } else {
         clearTimer();
         var v = activeVideo();
@@ -119,6 +165,7 @@
     io.observe(root);
   }
 
+  /* ---- Swipe navigation (does not itself pause anything) ---- */
   var startX = 0;
   var deltaX = 0;
   var dragging = false;
@@ -127,7 +174,6 @@
     dragging = true;
     startX = e.touches[0].clientX;
     deltaX = 0;
-    clearTimer();
   }, { passive: true });
 
   viewport.addEventListener('touchmove', function (e) {
@@ -140,12 +186,10 @@
     dragging = false;
     if (Math.abs(deltaX) > 40) {
       goTo(deltaX < 0 ? index + 1 : index - 1);
-    } else {
-      scheduleNext();
     }
     deltaX = 0;
   });
 
   render();
-  scheduleNext();
+  activateSlide();
 })();
