@@ -169,9 +169,8 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
 .about-media::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, transparent 55%, rgba(3, 10, 13, .85)); }
 .about-media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; filter: saturate(.78) contrast(1.05); transition: transform .9s var(--ease); }
 .about-media:hover img { transform: scale(1.04); }
-.about-copy p:not(.eyebrow):not(.founder-label) { color: var(--ivory-muted); max-width: 420px; margin: 22px 0; }
+.about-copy p:not(.eyebrow):not(.signature) { color: var(--ivory-muted); max-width: 420px; margin: 22px 0; }
 .signature { color: var(--champagne); font-family: 'Cormorant Garamond', cursive; font-style: italic; font-size: 46px; margin-top: 8px; }
-.founder-label { color: rgba(240, 232, 219, .4); font-size: 9px; letter-spacing: .2em; text-transform: uppercase; }
 
 .value-list { list-style: none; margin: 0; padding: 0; }
 .value-list li { display: grid; grid-template-columns: 30px 1fr; gap: 16px; padding: 22px 0; border-bottom: 1px solid var(--line); }
