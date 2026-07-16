@@ -229,6 +229,51 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
 .service-detail dd { margin: 5px 0 0; color: var(--champagne-light); font-family: var(--serif); font-size: 23px; }
 
 /* ==========================================================================
+   Recent work (photo/video carousel)
+   ========================================================================== */
+.work { display: grid; grid-template-columns: .85fr 1.15fr; gap: 56px; align-items: center; }
+.work-copy p:not(.eyebrow) { color: var(--ivory-muted); max-width: 380px; margin: 18px 0 26px; }
+
+.work-carousel {
+  position: relative; max-width: 380px; margin-inline: auto;
+  border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
+  border: 1px solid var(--line); background: #081216;
+}
+.work-carousel:focus-visible { outline: 2px solid var(--teal); outline-offset: 4px; }
+
+.carousel-viewport { position: relative; aspect-ratio: 4 / 5; overflow: hidden; }
+.carousel-track { display: flex; height: 100%; transition: transform .55s cubic-bezier(.2, .7, .2, 1); will-change: transform; }
+.carousel-slide { flex: 0 0 100%; width: 100%; height: 100%; position: relative; }
+.carousel-slide img, .carousel-slide video {
+  width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+  filter: saturate(.85) contrast(1.03);
+}
+.carousel-scrim {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(3, 10, 13, .35) 0%, transparent 22%, transparent 68%, rgba(3, 10, 13, .8) 100%);
+}
+
+.carousel-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 3;
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; padding: 0;
+  border: 1px solid var(--line-warm); background: rgba(4, 12, 16, .55); backdrop-filter: blur(6px);
+  color: var(--ivory); font-size: 20px; line-height: 1; cursor: pointer;
+  transition: background .25s var(--ease), border-color .25s var(--ease);
+}
+.carousel-arrow:hover, .carousel-arrow:focus-visible { background: rgba(4, 12, 16, .82); border-color: rgba(239, 217, 169, .7); }
+.carousel-prev { left: 12px; }
+.carousel-next { right: 12px; }
+
+.carousel-dots { position: absolute; z-index: 3; left: 0; right: 0; bottom: 16px; display: flex; justify-content: center; gap: 8px; }
+.carousel-dot {
+  width: 7px; height: 7px; border-radius: 50%; padding: 0; cursor: pointer;
+  border: 1px solid rgba(240, 232, 219, .5); background: rgba(240, 232, 219, .15);
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+.carousel-dot.active { background: var(--champagne); border-color: var(--champagne); transform: scale(1.2); }
+.carousel-dot:hover { border-color: var(--champagne-light); }
+
+/* ==========================================================================
    Visit
    ========================================================================== */
 .visit { display: grid; grid-template-columns: .9fr 1.1fr; gap: 56px; align-items: center; }
@@ -348,6 +393,9 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
   .service-image-wrap::after { background: linear-gradient(180deg, transparent 60%, var(--panel)); }
   .service-detail { padding: 36px 26px 46px; }
 
+  .work { grid-template-columns: 1fr; }
+  .work-copy p:not(.eyebrow) { max-width: none; }
+
   .visit { grid-template-columns: 1fr; }
   .booking-copy .button { width: 100%; }
 }
@@ -359,6 +407,7 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
   h2 { font-size: 40px; }
   .service-tabs { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; margin-right: -20px; gap: 10px; }
   .service-card { min-width: 200px; scroll-snap-align: start; }
+  .work-carousel { max-width: 320px; }
   .visit-grid { grid-template-columns: 1fr; }
   .map-card, .map-card svg { min-height: 380px; }
   .map-label { left: 18px; right: 18px; bottom: 18px; width: auto; }
