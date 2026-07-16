@@ -30,12 +30,13 @@ The 3D treatment is built from the real video footage, not abstract graphics:
 - **Cards** (services, about portrait, map): CSS 3D tilt-on-hover with a light "shine" following the cursor. Desktop/fine-pointer only — touch devices keep the existing tap/active states instead, since hover-tilt doesn't make sense without a persistent pointer.
 - All tilt effects respect `prefers-reduced-motion` (skipped entirely) and add no dependency — no external library, no runtime CDN request.
 
-## Before launch — fill in real business info
+## Before launch
 
-Address, phone, Instagram, and the booking link are all filled in. Still to do:
+Address, phone, Instagram, hours, and the booking link are all filled in with real info. No business email is used (contact points are phone/Instagram only) — the `privacy.html` and `accessibility.html` contact sections were updated to reflect that.
 
-- `[shop email]` — contact email, used in `privacy.html` and `accessibility.html` (search for it)
-- Hours are set to "By appointment" — update the Visit section in `index.html` if you want listed hours instead.
+## Services
+
+The service menu in the Services section (`index.html`) mirrors the real Booksy listing (Regular Haircut, Skin Fade, Taper, Blowout Taper, Burst Fade, Mullet, Wash + Style, Beard Trim, Haircut + Design, Haircut + Beard Trim, Line Up, Long Hair) with the same prices and durations. Booksy listed "Taper", "Skin Fade", and "Any haircut + beard trim" twice each (once under "Popular Services", once under "Other Services", same price/time both times) — only included once here. If the real menu changes, update the `data-time` / `data-price` / `data-desc` attributes on the `.service-card` buttons in `index.html` (and the matching default content in `#service-panel` for whichever card has the `active` class).
 
 ## Video/image asset roles
 
