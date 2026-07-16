@@ -12,7 +12,7 @@
   var viewport = root.querySelector('.carousel-viewport');
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var IMAGE_DURATION = 4500;
+  var IMAGE_DURATION = 3000;
   var VIDEO_FALLBACK = 16000;
 
   var index = 0;
