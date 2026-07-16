@@ -17,7 +17,7 @@ assets/images/          shop-interior.png, tools-macro.png, logo-mark.png (nav/f
                         favicon-32.png / favicon-512.png
 assets/video/           hero-loop.mp4, cta-loop.mp4 (in use), gallery-loop.mp4 (unused — see note below)
 assets/gallery/         Recent Work carousel media — see "Recent Work carousel" below
-netlify.toml             Netlify build/cache config + security headers + noindex
+_headers                 Cloudflare Pages cache/security headers + noindex
 ```
 
 ## Logo
@@ -85,11 +85,18 @@ git remote add origin <your-repo-url>
 git push -u origin main
 ```
 
-### Netlify
+### Cloudflare Pages
 
-- **New site from Git** → pick this repo → build command: (none) → publish directory: `.`
-- Or drag-and-drop the project folder into Netlify's dashboard for a manual deploy.
-- `netlify.toml` is already set up with long-term caching for images/video.
+Live at **https://saint-the-barber.pages.dev** — free tier, no card on file, no usage-based billing.
+
+- One-time manual deploy (what was used to stand this up):
+  ```
+  npx wrangler login
+  npx wrangler pages project create saint-the-barber --production-branch=main
+  npx wrangler pages deploy . --project-name=saint-the-barber --branch=main
+  ```
+- **To get auto-deploy on every push** (recommended, not yet set up): Cloudflare dashboard → Workers & Pages → `saint-the-barber` → Settings → Builds → Connect to Git → authorize GitHub → pick `Wall20k/saint-cuts` → build command: (none), output directory: `.`. After that, every push to `main` deploys automatically and you don't need the manual `wrangler pages deploy` step above.
+- `_headers` is already set up with long-term caching for images/video and the security/noindex headers (Cloudflare Pages uses a `_headers` file for this instead of Netlify's `netlify.toml`).
 
 ### Note on file sizes
 
@@ -97,7 +104,7 @@ The three video files are 6–10MB each (well under GitHub's 100MB limit, no Git
 
 ## Security & legal notes
 
-- The repo is private and the deployed Netlify URL is set to `noindex, nofollow` (both in HTML `<meta>` tags and via an `X-Robots-Tag` response header in `netlify.toml`) while the site still contains placeholder business info and AI-generated imagery. Search engines won't index it, but the URL itself is not password-protected — anyone with the direct link can view it.
-- `netlify.toml` also sets baseline security headers (`X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy`).
-- No API keys, tokens, or credentials are stored anywhere in this repo.
-- Before making the repo public or removing `noindex`: replace the placeholder address/phone/hours/Instagram handle with real information, and confirm you have the rights to use the AI-generated photos/video commercially (check the generator's terms of service for commercial-use and ownership terms) since they're bundled directly into this repo.
+- The repo is private, and the deployed Cloudflare Pages URL is set to `noindex, nofollow` (both in HTML `<meta>` tags and via an `X-Robots-Tag` response header in `_headers`). Search engines won't index it, but the URL itself is not password-protected — anyone with the direct link can view it. Cloudflare Pages doesn't offer free built-in password protection the way Netlify does; if you want that, put Cloudflare Access (also free for personal use) in front of the project, or ask for it to be set up.
+- `_headers` also sets baseline security headers (`X-Content-Type-Options`, `X-Frame-Options: DENY`, `Referrer-Policy`).
+- No API keys, tokens, or credentials are stored anywhere in this repo. The Cloudflare deploy was authenticated via OAuth login in a real browser session (`wrangler login`) — no token was ever pasted into chat or committed to the repo.
+- Address, phone, hours, and Instagram are real, current info — not placeholders. The hero/About/Services photos (`shop-interior.png`, `tools-macro.png`) and the hero/booking background videos are AI-generated; confirm you have the rights to use them commercially (check the generator's terms of service) before making the repo public, since they're bundled directly into it. The Recent Work carousel photos/video are real customer photos, not AI-generated.
