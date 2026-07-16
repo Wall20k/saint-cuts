@@ -232,10 +232,13 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
    Recent work (photo/video carousel)
    ========================================================================== */
 .work { display: grid; grid-template-columns: .85fr 1.15fr; gap: 56px; align-items: center; }
-.work-copy p:not(.eyebrow) { color: var(--ivory-muted); max-width: 380px; margin: 18px 0 26px; }
+.work-copy p:not(.eyebrow) { color: var(--ivory-muted); max-width: 380px; margin: 18px 0 0; }
+
+.work-media { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+.work-instagram-link { margin: 0 auto; }
 
 .work-carousel {
-  position: relative; max-width: 380px; margin-inline: auto;
+  position: relative; width: 100%; max-width: 380px; margin-inline: auto;
   border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow);
   border: 1px solid var(--line); background: #081216;
 }
