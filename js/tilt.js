@@ -2,31 +2,59 @@
   'use strict';
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
+
   var isFinePointer = window.matchMedia('(pointer: fine)').matches;
-  if (reduceMotion || !isFinePointer) return;
+  var isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  if (!isFinePointer && !isTouch) return;
+
+  /* A mouse can hover and move freely, so tilt tracks the cursor live. A
+     finger has no hover -- the closest equivalent is tracking the touch
+     point itself while it's down on the element, then springing back to
+     flat on release. Touch listeners are passive so a vertical swipe still
+     scrolls the page normally; the tilt is just a side effect of contact. */
+  function bindTilt(target, apply, reset) {
+    var raf = null;
+    var update = function (clientX, clientY) {
+      if (raf) return;
+      raf = requestAnimationFrame(function () {
+        apply(clientX, clientY);
+        raf = null;
+      });
+    };
+
+    if (isFinePointer) {
+      target.addEventListener('mousemove', function (e) { update(e.clientX, e.clientY); });
+      target.addEventListener('mouseleave', reset);
+    }
+    if (isTouch) {
+      target.addEventListener('touchstart', function (e) {
+        var t = e.touches[0];
+        if (t) update(t.clientX, t.clientY);
+      }, { passive: true });
+      target.addEventListener('touchmove', function (e) {
+        var t = e.touches[0];
+        if (t) update(t.clientX, t.clientY);
+      }, { passive: true });
+      target.addEventListener('touchend', reset);
+      target.addEventListener('touchcancel', reset);
+    }
+  }
 
   /* ---- Card tilt (map card, service rows) ---- */
   function bindCardTilt(el, strengthX, strengthY) {
     el.classList.add('tilt');
-    var raf = null;
-
-    el.addEventListener('mousemove', function (e) {
-      if (raf) return;
-      raf = requestAnimationFrame(function () {
-        var rect = el.getBoundingClientRect();
-        var px = (e.clientX - rect.left) / rect.width;
-        var py = (e.clientY - rect.top) / rect.height;
-        var rx = (0.5 - py) * strengthX;
-        var ry = (px - 0.5) * strengthY;
-        el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
-        el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
-        el.style.setProperty('--shine-x', (px * 100).toFixed(1) + '%');
-        el.style.setProperty('--shine-y', (py * 100).toFixed(1) + '%');
-        raf = null;
-      });
-    });
-
-    el.addEventListener('mouseleave', function () {
+    bindTilt(el, function (clientX, clientY) {
+      var rect = el.getBoundingClientRect();
+      var px = (clientX - rect.left) / rect.width;
+      var py = (clientY - rect.top) / rect.height;
+      var rx = (0.5 - py) * strengthX;
+      var ry = (px - 0.5) * strengthY;
+      el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
+      el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
+      el.style.setProperty('--shine-x', (px * 100).toFixed(1) + '%');
+      el.style.setProperty('--shine-y', (py * 100).toFixed(1) + '%');
+    }, function () {
       el.style.setProperty('--rx', '0deg');
       el.style.setProperty('--ry', '0deg');
     });
@@ -43,22 +71,15 @@
     var section = document.getElementById(sectionId);
     var media = document.getElementById(mediaId);
     if (!section || !media) return;
-    var raf = null;
-
-    section.addEventListener('mousemove', function (e) {
-      if (raf) return;
-      raf = requestAnimationFrame(function () {
-        var rect = section.getBoundingClientRect();
-        var px = (e.clientX - rect.left) / rect.width;
-        var py = (e.clientY - rect.top) / rect.height;
-        var rx = (0.5 - py) * strengthX;
-        var ry = (px - 0.5) * strengthY;
-        media.style.setProperty('--tilt-rx', rx.toFixed(2) + 'deg');
-        media.style.setProperty('--tilt-ry', ry.toFixed(2) + 'deg');
-        raf = null;
-      });
-    });
-    section.addEventListener('mouseleave', function () {
+    bindTilt(section, function (clientX, clientY) {
+      var rect = section.getBoundingClientRect();
+      var px = (clientX - rect.left) / rect.width;
+      var py = (clientY - rect.top) / rect.height;
+      var rx = (0.5 - py) * strengthX;
+      var ry = (px - 0.5) * strengthY;
+      media.style.setProperty('--tilt-rx', rx.toFixed(2) + 'deg');
+      media.style.setProperty('--tilt-ry', ry.toFixed(2) + 'deg');
+    }, function () {
       media.style.setProperty('--tilt-rx', '0deg');
       media.style.setProperty('--tilt-ry', '0deg');
     });
