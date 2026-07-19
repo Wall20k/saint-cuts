@@ -5,9 +5,8 @@
   var isFinePointer = window.matchMedia('(pointer: fine)').matches;
   if (reduceMotion || !isFinePointer) return;
 
-  /* ---- Card tilt (about portrait, map card, service rows) ---- */
-  var tiltEls = document.querySelectorAll('.about-media, .map-card, .service-row');
-  tiltEls.forEach(function (el) {
+  /* ---- Card tilt (map card, service rows) ---- */
+  function bindCardTilt(el, strengthX, strengthY) {
     el.classList.add('tilt');
     var raf = null;
 
@@ -17,8 +16,8 @@
         var rect = el.getBoundingClientRect();
         var px = (e.clientX - rect.left) / rect.width;
         var py = (e.clientY - rect.top) / rect.height;
-        var rx = (0.5 - py) * 10;
-        var ry = (px - 0.5) * 12;
+        var rx = (0.5 - py) * strengthX;
+        var ry = (px - 0.5) * strengthY;
         el.style.setProperty('--rx', rx.toFixed(2) + 'deg');
         el.style.setProperty('--ry', ry.toFixed(2) + 'deg');
         el.style.setProperty('--shine-x', (px * 100).toFixed(1) + '%');
@@ -31,7 +30,13 @@
       el.style.setProperty('--rx', '0deg');
       el.style.setProperty('--ry', '0deg');
     });
-  });
+  }
+
+  document.querySelectorAll('.map-card').forEach(function (el) { bindCardTilt(el, 10, 12); });
+  /* Service rows are short and wide, so the same subtle angles used for a
+     roughly-square card barely register -- push both axes harder so the
+     tilt is actually visible on a shallow rectangle. */
+  document.querySelectorAll('.service-row').forEach(function (el) { bindCardTilt(el, 22, 8); });
 
   /* ---- Full-bleed video tilt (hero + booking CTA panes) ---- */
   function bindMediaTilt(sectionId, mediaId, strengthX, strengthY) {
