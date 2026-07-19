@@ -75,6 +75,28 @@
     });
   });
 
+  // Services horizontal scroll arrows (shown on mobile, where the list scrolls)
+  var serviceScroller = doc.querySelector('.service-scroller');
+  if (serviceScroller) {
+    var serviceTabsEl = serviceScroller.querySelector('.service-tabs');
+    var servicePrevArrow = serviceScroller.querySelector('.carousel-prev');
+    var serviceNextArrow = serviceScroller.querySelector('.carousel-next');
+    var serviceScrollAmount = function () {
+      var card = serviceTabsEl.querySelector('.service-card');
+      return card ? card.getBoundingClientRect().width + 10 : 220;
+    };
+    if (servicePrevArrow) {
+      servicePrevArrow.addEventListener('click', function () {
+        serviceTabsEl.scrollBy({ left: -serviceScrollAmount(), behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    }
+    if (serviceNextArrow) {
+      serviceNextArrow.addEventListener('click', function () {
+        serviceTabsEl.scrollBy({ left: serviceScrollAmount(), behavior: reduceMotion ? 'auto' : 'smooth' });
+      });
+    }
+  }
+
   // Scroll reveal
   var revealEls = doc.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduceMotion && revealEls.length) {

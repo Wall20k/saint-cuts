@@ -185,6 +185,9 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
 .section-heading h2 { margin-bottom: 0; }
 .section-heading > p { max-width: 320px; color: var(--ivory-muted); }
 
+.service-scroller { position: relative; }
+.service-scroller .service-scroll-arrow { display: none; }
+
 .service-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .service-card {
   position: relative;
@@ -201,6 +204,14 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
 .service-card.tilt {
   transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
   transition: transform .5s cubic-bezier(.2, .7, .2, 1), border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+/* Active card always pops forward, flat-on toward the viewer -- overrides any
+   live tilt rotation so the top edge never rotates back "into" the page. */
+.service-card.active, .service-card.tilt.active {
+  z-index: 2;
+  transform: perspective(900px) translateY(-10px) translateZ(28px) scale(1.045) rotateX(0deg) rotateY(0deg);
+  border-color: rgba(198, 168, 115, .6);
+  box-shadow: 0 26px 46px rgba(0, 0, 0, .4), 0 0 32px rgba(198, 168, 115, .18), 0 0 0 1px rgba(198, 168, 115, .12);
 }
 .service-card:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 .service-icon { color: var(--champagne); font-family: var(--serif); font-size: 30px; }
@@ -250,6 +261,7 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
 .carousel-slide img, .carousel-slide video {
   width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
   filter: saturate(.85) contrast(1.03);
+  -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; -webkit-user-drag: none;
 }
 .carousel-scrim {
   position: absolute; inset: 0; pointer-events: none;
@@ -410,6 +422,9 @@ h2 em, h1 em { color: var(--champagne); font-style: normal; }
   h2 { font-size: 40px; }
   .service-tabs { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; margin-right: -20px; gap: 10px; }
   .service-card { min-width: 200px; scroll-snap-align: start; }
+  .service-scroller .service-scroll-arrow { display: grid; }
+  .service-scroller .service-scroll-arrow.carousel-prev { left: -6px; }
+  .service-scroller .service-scroll-arrow.carousel-next { right: 14px; }
   .work-carousel { max-width: 320px; }
   .visit-grid { grid-template-columns: 1fr; }
   .map-card, .map-card svg { min-height: 380px; }

@@ -127,6 +127,11 @@
     else if (e.key === 'ArrowRight') { goTo(index + 1); }
   });
 
+  /* A hold is meant to pause the carousel, not open the browser's native
+     save-image/copy context menu (Android fires 'contextmenu' on long-press;
+     iOS Safari is handled by the -webkit-touch-callout CSS property). */
+  root.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
   /* ---- Press-and-HOLD to pause (plain clicks/taps never pause) ---- */
   var holdTimer = null;
 
