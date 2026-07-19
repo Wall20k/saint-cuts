@@ -55,8 +55,10 @@
       el.style.setProperty('--shine-x', (px * 100).toFixed(1) + '%');
       el.style.setProperty('--shine-y', (py * 100).toFixed(1) + '%');
     }, function () {
-      el.style.setProperty('--rx', '0deg');
-      el.style.setProperty('--ry', '0deg');
+      /* Remove rather than zero out, so a resting-tilt CSS fallback (if any)
+         takes back over once contact ends, instead of getting stuck flat. */
+      el.style.removeProperty('--rx');
+      el.style.removeProperty('--ry');
     });
   }
 
@@ -80,8 +82,8 @@
       media.style.setProperty('--tilt-rx', rx.toFixed(2) + 'deg');
       media.style.setProperty('--tilt-ry', ry.toFixed(2) + 'deg');
     }, function () {
-      media.style.setProperty('--tilt-rx', '0deg');
-      media.style.setProperty('--tilt-ry', '0deg');
+      media.style.removeProperty('--tilt-rx');
+      media.style.removeProperty('--tilt-ry');
     });
   }
 
