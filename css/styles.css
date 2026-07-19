@@ -190,16 +190,25 @@ h2 em, h1 em { color: var(--accent); font-style: normal; }
 .service-row {
   position: relative; display: flex; align-items: flex-start; gap: 18px;
   padding: 20px 20px 20px 24px; border: 1px solid var(--line); border-radius: 14px;
-  transition: background .3s var(--ease), border-color .3s var(--ease);
+  transform: translateY(var(--lift, 0px));
+  transition: transform .25s var(--ease), background .3s var(--ease), border-color .3s var(--ease), box-shadow .25s var(--ease);
 }
-.service-row::before {
+.service-row.tilt {
+  transform: perspective(900px) translateY(var(--lift, 0px)) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .5s cubic-bezier(.2, .7, .2, 1), background .3s var(--ease), border-color .3s var(--ease), box-shadow .25s var(--ease);
+}
+.service-row:hover {
+  --lift: -4px;
+  background: rgba(var(--accent-rgb), .05); border-color: rgba(var(--accent-rgb), .4);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, .35), 0 0 22px rgba(var(--accent-rgb), .12);
+}
+.service-row::after {
   content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px;
   border-radius: 0 3px 3px 0;
   background: var(--accent); transform: scaleY(0); transform-origin: center;
   transition: transform .3s var(--ease);
 }
-.service-row:hover { background: rgba(var(--accent-rgb), .05); border-color: rgba(var(--accent-rgb), .4); }
-.service-row:hover::before { transform: scaleY(1); }
+.service-row:hover::after { transform: scaleY(1); }
 
 .service-row-body { flex: 1; min-width: 0; }
 .service-row-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; }

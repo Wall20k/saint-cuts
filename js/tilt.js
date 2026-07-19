@@ -5,8 +5,8 @@
   var isFinePointer = window.matchMedia('(pointer: fine)').matches;
   if (reduceMotion || !isFinePointer) return;
 
-  /* ---- Card tilt (about portrait, map card) ---- */
-  var tiltEls = document.querySelectorAll('.about-media, .map-card');
+  /* ---- Card tilt (about portrait, map card, service rows) ---- */
+  var tiltEls = document.querySelectorAll('.about-media, .map-card, .service-row');
   tiltEls.forEach(function (el) {
     el.classList.add('tilt');
     var raf = null;
