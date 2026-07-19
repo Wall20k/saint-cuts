@@ -186,18 +186,19 @@ h2 em, h1 em { color: var(--accent); font-style: normal; }
 
 .services-layout { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(32px, 4vw, 64px); align-items: start; }
 
-.service-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.service-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
 .service-row {
   position: relative; display: flex; align-items: flex-start; gap: 18px;
-  padding: 22px 10px 22px 16px; border-bottom: 1px solid var(--line);
-  transition: background .3s var(--ease), padding-left .3s var(--ease);
+  padding: 20px 20px 20px 24px; border: 1px solid var(--line); border-radius: 14px;
+  transition: background .3s var(--ease), border-color .3s var(--ease);
 }
 .service-row::before {
-  content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 2px;
+  content: ''; position: absolute; left: 0; top: 14px; bottom: 14px; width: 3px;
+  border-radius: 0 3px 3px 0;
   background: var(--accent); transform: scaleY(0); transform-origin: center;
   transition: transform .3s var(--ease);
 }
-.service-row:hover { background: rgba(var(--accent-rgb), .05); padding-left: 26px; }
+.service-row:hover { background: rgba(var(--accent-rgb), .05); border-color: rgba(var(--accent-rgb), .4); }
 .service-row:hover::before { transform: scaleY(1); }
 
 .service-row-body { flex: 1; min-width: 0; }
@@ -399,8 +400,7 @@ h2 em, h1 em { color: var(--accent); font-style: normal; }
   .hero-content { padding: 120px 20px 56px; }
   .hero-actions { flex-direction: column; gap: 16px; }
   h2 { font-size: 40px; }
-  .service-row { flex-wrap: wrap; padding: 18px 6px; }
-  .service-row:hover { padding-left: 6px; }
+  .service-row { flex-wrap: wrap; padding: 16px 14px 16px 18px; }
   .service-row-heading strong { font-size: 17px; }
   .service-row-book { flex-basis: 100%; order: 3; text-align: center; opacity: 1; margin-top: 4px; }
   .work-carousel { max-width: 320px; }
