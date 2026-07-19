@@ -24,15 +24,15 @@ _headers                 Cloudflare Pages cache/security headers
 
 `logo-mark.png` is a cropped, transparent-background version of the supplied crest logo (crest only, wordmark removed) used next to the "Saint / The Barber" text in the header and footer. `logo-full.png` is the same treatment but keeps the "SAINT THE BARBER" text baked into the image — not used anywhere currently, kept in case you want it for something like a larger standalone placement. Both had their black background converted to transparency locally (brightness-based alpha), so they drop onto the dark theme with no visible box around them. Favicons were generated from the crest mark.
 
-The crest was recolored (RGB channels set to the icy pastel `#F6F5FF`, original alpha/silhouette preserved) to match the black-and-white theme below — was originally gold.
+The crest is gold (`#C6A873`, RGB channels set uniformly, original alpha/silhouette preserved) to match the accent color below.
 
 ## Color palette
 
-Black-and-white theme, defined as CSS custom properties in `css/styles.css`:
+Jet black + icy pastel base with a gold accent, defined as CSS custom properties in `css/styles.css`:
 
 - `--ink` `#1D1D1D` (jet black, base background) / `--ink-2`, `--panel`, `--panel-2` — darker-to-lighter near-black surfaces
 - `--ivory` `#F6F5FF` (icy pastel, primary text) / `--ivory-muted` — dimmer body copy
-- `--accent` `#FFFFFF` (pure white — buttons, active states, prices, glows) / `--muted-accent` — secondary/quiet accent (eyebrows, labels)
+- `--accent` `#C6A873` (gold — logo, headline highlights, prices, active states) / `--muted-accent` — a dimmer gold for secondary labels (eyebrows, small caps)
 - `--line` / `--line-strong` — translucent icy-white hairlines and borders
 
 Typeface pairing (Cormorant Garamond serif headings + Inter sans body) is unchanged — only color moved, not type.
@@ -51,9 +51,9 @@ Address, phone, Instagram, hours, and the booking link are all filled in with re
 
 ## Services
 
-The service menu in the Services section (`index.html`) mirrors the real Booksy listing (Regular Haircut, Skin Fade, Taper, Blowout Taper, Burst Fade, Mullet, Wash + Style, Beard Trim, Haircut + Design, Haircut + Beard Trim, Line Up, Long Hair) with the same prices and durations. Booksy listed "Taper", "Skin Fade", and "Any haircut + beard trim" twice each (once under "Popular Services", once under "Other Services", same price/time both times) — only included once here. If the real menu changes, update the `data-time` / `data-price` / `data-desc` attributes on the `.service-card` buttons in `index.html` (and the matching default content in `#service-panel` for whichever card has the `active` class).
+The service menu in the Services section (`index.html`) mirrors the real Booksy listing (Regular Haircut, Skin Fade, Taper, Blowout Taper, Burst Fade, Mullet, Wash + Style, Beard Trim, Haircut + Design, Haircut + Beard Trim, Line Up, Long Hair) with the same prices and durations. Booksy listed "Taper", "Skin Fade", and "Any haircut + beard trim" twice each (once under "Popular Services", once under "Other Services", same price/time both times) — only included once here.
 
-- On mobile (≤560px), the service cards become a horizontally scrolling, scroll-snap strip. Since that overflow isn't obvious at a glance, `.service-tabs` is wrapped in a `.service-scroller` with the same arrow buttons used on the Recent Work carousel (reusing the `.carousel-arrow`/`.carousel-prev`/`.carousel-next` classes) — hidden above 560px since the grid just wraps to more rows there and there's nothing to scroll. Wired up in `js/main.js` via `scrollBy` on `.service-tabs`.
+Laid out as a single vertical list (`.service-list`, one `.service-row` per service) rather than a card grid — closer to how Booksy itself presents the menu, but styled as a numbered menu: index number, service name, a gold dot-leader rule, price, description, duration, and a pill-shaped "Book" link (jumps to `#booking`), with a gold accent bar that reveals on row hover. A static photo sits alongside the list on desktop (`.service-media`, sticky) and moves above the list on mobile. If the real menu changes, edit the `.service-row` entries directly in `index.html` — there's no JS-driven data binding, each row is static markup.
 - The active/selected service card pops forward in 3D (`translateZ` + scale, lifted, gold glow) rather than just lifting slightly. This also **locks its rotation to flat** (`rotateX(0) rotateY(0)`), overriding whatever live hover-tilt rotation (`js/tilt.js`) was in effect — without that override, a card tilted backward at the moment of an active-state click could visually look like its top edge recedes into the page instead of popping out.
 
 ## Recent Work carousel
