@@ -37,66 +37,6 @@
     });
   }
 
-  // Services tab panel
-  var tabs = doc.querySelectorAll('.service-card');
-  var panel = doc.getElementById('service-panel');
-  var img = doc.getElementById('service-image');
-  var nameEl = doc.getElementById('service-name');
-  var descEl = doc.getElementById('service-description');
-  var timeEl = doc.getElementById('service-time');
-  var priceEl = doc.getElementById('service-price');
-
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      if (tab.classList.contains('active')) return;
-
-      tabs.forEach(function (t) {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
-      });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-
-      if (panel) panel.classList.add('changing');
-
-      var applyContent = function () {
-        if (nameEl) nameEl.textContent = tab.querySelector('strong').textContent;
-        if (descEl) descEl.textContent = tab.dataset.desc || '';
-        if (timeEl) timeEl.textContent = tab.dataset.time || '';
-        if (priceEl) priceEl.textContent = tab.dataset.price || '';
-        if (panel) panel.classList.remove('changing');
-      };
-
-      if (reduceMotion) {
-        applyContent();
-      } else {
-        window.setTimeout(applyContent, 180);
-      }
-    });
-  });
-
-  // Services horizontal scroll arrows (shown on mobile, where the list scrolls)
-  var serviceScroller = doc.querySelector('.service-scroller');
-  if (serviceScroller) {
-    var serviceTabsEl = serviceScroller.querySelector('.service-tabs');
-    var servicePrevArrow = serviceScroller.querySelector('.carousel-prev');
-    var serviceNextArrow = serviceScroller.querySelector('.carousel-next');
-    var serviceScrollAmount = function () {
-      var card = serviceTabsEl.querySelector('.service-card');
-      return card ? card.getBoundingClientRect().width + 10 : 220;
-    };
-    if (servicePrevArrow) {
-      servicePrevArrow.addEventListener('click', function () {
-        serviceTabsEl.scrollBy({ left: -serviceScrollAmount(), behavior: reduceMotion ? 'auto' : 'smooth' });
-      });
-    }
-    if (serviceNextArrow) {
-      serviceNextArrow.addEventListener('click', function () {
-        serviceTabsEl.scrollBy({ left: serviceScrollAmount(), behavior: reduceMotion ? 'auto' : 'smooth' });
-      });
-    }
-  }
-
   // Scroll reveal
   var revealEls = doc.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduceMotion && revealEls.length) {

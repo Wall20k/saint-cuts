@@ -147,79 +147,125 @@
     <div class="section-heading reveal">
       <div>
         <p class="eyebrow">Services</p>
-        <h2 id="services-title">Tailored to you.</h2>
+        <h2 id="services-title">The full menu.</h2>
       </div>
-      <p>Select a service to preview the experience.</p>
+      <p>Every cut, trim, and add-on — real prices, real times.</p>
     </div>
 
-    <div class="service-scroller">
-    <button class="carousel-arrow carousel-prev service-scroll-arrow" type="button" aria-label="Scroll services left">&#8249;</button>
-    <div class="service-tabs reveal" role="tablist" aria-label="Haircut services">
-      <button class="service-card active" role="tab" aria-selected="true" aria-controls="service-panel" data-service="regular-haircut" data-time="1 hour" data-price="$30" data-desc="Not bald at the bottom of the fade, hair kept shorter using guards.">
-        <span class="service-icon" aria-hidden="true">&#9585;</span>
-        <strong>Regular Haircut</strong><small>1 hr</small><b>$30</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="skin-fade" data-time="1 hour" data-price="$35" data-desc="Bald at the bottom of the fade, then blended up.">
-        <span class="service-icon fade-icon" aria-hidden="true"><i></i><i></i><i></i></span>
-        <strong>Skin Fade</strong><small>1 hr</small><b>$35</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="taper" data-time="1 hour" data-price="$35" data-desc="Temples and nape faded underneath.">
-        <span class="service-icon" aria-hidden="true">&#9698;</span>
-        <strong>Taper</strong><small>1 hr</small><b>$35</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="blowout-taper" data-time="1 hour" data-price="$40" data-desc="Faded at the temple and nape, with more volume throughout the head.">
-        <span class="service-icon fade-icon" aria-hidden="true"><i></i><i></i><i></i></span>
-        <strong>Blowout Taper</strong><small>1 hr</small><b>$40</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="burst-fade" data-time="1 hour" data-price="$35" data-desc="Faded on the side of the head.">
-        <span class="service-icon" aria-hidden="true">&#9711;</span>
-        <strong>Burst Fade</strong><small>1 hr</small><b>$35</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="mullet" data-time="1 hour" data-price="$35" data-desc="Faded (optional) or a regular scissor trim throughout the haircut.">
-        <span class="service-icon" aria-hidden="true">&#8776;</span>
-        <strong>Mullet</strong><small>1 hr</small><b>$35</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="wash-style" data-time="30 minutes" data-price="$10" data-desc="Hair washed and styled.">
-        <span class="service-icon" aria-hidden="true">&#9686;</span>
-        <strong>Wash + Style</strong><small>30 min</small><b>$10</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="beard-trim" data-time="30 minutes" data-price="$15" data-desc="Beard shaped and lined up.">
-        <span class="service-icon" aria-hidden="true">&#9135;</span>
-        <strong>Beard Trim</strong><small>30 min</small><b>$15</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="haircut-design" data-time="1 hour 30 minutes" data-price="$45" data-desc="Any skin fade or taper with a custom design.">
-        <span class="service-icon" aria-hidden="true">&#9670;</span>
-        <strong>Haircut + Design</strong><small>1 hr 30 min</small><b>$45</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="haircut-beard-trim" data-time="1 hour 30 minutes" data-price="$45" data-desc="Any haircut plus a beard trim.">
-        <span class="service-icon" aria-hidden="true">&#9650;</span>
-        <strong>Haircut + Beard Trim</strong><small>1 hr 30 min</small><b>$45</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="line-up" data-time="30 minutes" data-price="$15" data-desc="A clean edge-up for your hairline and beard.">
-        <span class="service-icon" aria-hidden="true">&#9644;</span>
-        <strong>Line Up</strong><small>30 min</small><b>$15</b>
-      </button>
-      <button class="service-card" role="tab" aria-selected="false" aria-controls="service-panel" data-service="long-hair" data-time="1 hour 30 minutes" data-price="$45" data-desc="Best for hair covering the ears, shoulders, or longer.">
-        <span class="service-icon" aria-hidden="true">&#8776;</span>
-        <strong>Long Hair</strong><small>1 hr 30 min</small><b>$45</b>
-      </button>
-    </div>
-    <button class="carousel-arrow carousel-next service-scroll-arrow" type="button" aria-label="Scroll services right">&#8250;</button>
-    </div>
+    <div class="services-layout">
+      <ul class="service-list reveal">
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Regular Haircut</strong>
+            <span>Not bald at the bottom of the fade, hair kept shorter using guards.</span>
+          </div>
+          <span class="service-row-time">1 hr</span>
+          <span class="service-row-price">$30</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Regular Haircut">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Skin Fade</strong>
+            <span>Bald at the bottom of the fade, then blended up.</span>
+          </div>
+          <span class="service-row-time">1 hr</span>
+          <span class="service-row-price">$35</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Skin Fade">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Taper</strong>
+            <span>Temples and nape faded underneath.</span>
+          </div>
+          <span class="service-row-time">1 hr</span>
+          <span class="service-row-price">$35</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Taper">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Blowout Taper</strong>
+            <span>Faded at the temple and nape, with more volume throughout the head.</span>
+          </div>
+          <span class="service-row-time">1 hr</span>
+          <span class="service-row-price">$40</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Blowout Taper">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Burst Fade</strong>
+            <span>Faded on the side of the head.</span>
+          </div>
+          <span class="service-row-time">1 hr</span>
+          <span class="service-row-price">$35</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Burst Fade">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Mullet</strong>
+            <span>Faded (optional) or a regular scissor trim throughout the haircut.</span>
+          </div>
+          <span class="service-row-time">1 hr</span>
+          <span class="service-row-price">$35</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Mullet">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Wash + Style</strong>
+            <span>Hair washed and styled.</span>
+          </div>
+          <span class="service-row-time">30 min</span>
+          <span class="service-row-price">$10</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Wash + Style">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Beard Trim</strong>
+            <span>Beard shaped and lined up.</span>
+          </div>
+          <span class="service-row-time">30 min</span>
+          <span class="service-row-price">$15</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Beard Trim">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Haircut + Design</strong>
+            <span>Any skin fade or taper with a custom design.</span>
+          </div>
+          <span class="service-row-time">1 hr 30 min</span>
+          <span class="service-row-price">$45</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Haircut + Design">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Haircut + Beard Trim</strong>
+            <span>Any haircut plus a beard trim.</span>
+          </div>
+          <span class="service-row-time">1 hr 30 min</span>
+          <span class="service-row-price">$45</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Haircut + Beard Trim">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Line Up</strong>
+            <span>A clean edge-up for your hairline and beard.</span>
+          </div>
+          <span class="service-row-time">30 min</span>
+          <span class="service-row-price">$15</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Line Up">Book</a>
+        </li>
+        <li class="service-row">
+          <div class="service-row-info">
+            <strong>Long Hair</strong>
+            <span>Best for hair covering the ears, shoulders, or longer.</span>
+          </div>
+          <span class="service-row-time">1 hr 30 min</span>
+          <span class="service-row-price">$45</span>
+          <a class="service-row-book" href="#booking" aria-label="Book Long Hair">Book</a>
+        </li>
+      </ul>
 
-    <div class="service-panel reveal" id="service-panel" role="tabpanel" tabindex="0">
-      <div class="service-image-wrap">
-        <img id="service-image" src="assets/images/tools-macro.png" alt="Barber tools laid out on a marble counter" width="1024" height="1024" loading="lazy">
-      </div>
-      <div class="service-detail">
-        <p class="eyebrow">The Saint standard</p>
-        <h3 id="service-name">Regular Haircut</h3>
-        <p id="service-description">Not bald at the bottom of the fade, hair kept shorter using guards.</p>
-        <dl>
-          <div><dt>Time</dt><dd id="service-time">1 hour</dd></div>
-          <div><dt>Price</dt><dd id="service-price">$30</dd></div>
-        </dl>
-        <a class="button" href="#booking">Book this service</a>
+      <div class="service-media reveal">
+        <img src="assets/images/tools-macro.png" alt="Barber tools laid out on a marble counter" width="1024" height="1024" loading="lazy">
       </div>
     </div>
   </section>
