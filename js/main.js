@@ -59,4 +59,30 @@
       v.pause();
     });
   }
+
+  // Keep the hero/booking background videos playing. Mobile browsers will
+  // sometimes pause autoplay video on their own (memory pressure, tab
+  // backgrounding, a network stall) with no visible controls to resume it,
+  // which left the empty video box showing through to whatever sits behind
+  // it. Force a resume any time that happens instead of leaving it stopped.
+  if (!reduceMotion) {
+    var bgVideos = doc.querySelectorAll('.hero-video, .booking-media video');
+    var resumeAll = function () {
+      bgVideos.forEach(function (v) {
+        if (v.paused) {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {});
+        }
+      });
+    };
+    bgVideos.forEach(function (v) {
+      v.addEventListener('pause', resumeAll);
+      v.addEventListener('stalled', resumeAll);
+      v.addEventListener('suspend', resumeAll);
+    });
+    doc.addEventListener('visibilitychange', function () {
+      if (!doc.hidden) resumeAll();
+    });
+    window.addEventListener('pageshow', resumeAll);
+  }
 })();
