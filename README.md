@@ -24,6 +24,19 @@ _headers                 Cloudflare Pages cache/security headers
 
 `logo-mark.png` is a cropped, transparent-background version of the supplied crest logo (crest only, wordmark removed) used next to the "Saint / The Barber" text in the header and footer. `logo-full.png` is the same treatment but keeps the "SAINT THE BARBER" text baked into the image — not used anywhere currently, kept in case you want it for something like a larger standalone placement. Both had their black background converted to transparency locally (brightness-based alpha), so they drop onto the dark theme with no visible box around them. Favicons were generated from the crest mark.
 
+The crest was recolored (RGB channels set to the icy pastel `#F6F5FF`, original alpha/silhouette preserved) to match the black-and-white theme below — was originally gold.
+
+## Color palette
+
+Black-and-white theme, defined as CSS custom properties in `css/styles.css`:
+
+- `--ink` `#1D1D1D` (jet black, base background) / `--ink-2`, `--panel`, `--panel-2` — darker-to-lighter near-black surfaces
+- `--ivory` `#F6F5FF` (icy pastel, primary text) / `--ivory-muted` — dimmer body copy
+- `--accent` `#FFFFFF` (pure white — buttons, active states, prices, glows) / `--muted-accent` — secondary/quiet accent (eyebrows, labels)
+- `--line` / `--line-strong` — translucent icy-white hairlines and borders
+
+Typeface pairing (Cormorant Garamond serif headings + Inter sans body) is unchanged — only color moved, not type.
+
 ## 3D / animation layer
 
 The 3D treatment is built from the real video footage, not abstract graphics:
